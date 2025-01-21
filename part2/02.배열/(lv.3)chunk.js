@@ -10,7 +10,14 @@
  * @returns {any[][]}
  */
 
-function chunkArray(arr, size) {}
+function chunkArray(arr, size) {
+    const chunkedArray = []
+    while (arr.length >= size) {
+        chunkedArray.push(arr.splice(0, size))
+    }
+    arr.length > 0 ? chunkedArray.push(arr) : chunkedArray
+    return chunkedArray
+}
 
 // export 를 수정하지 마세요.
 export { chunkArray };

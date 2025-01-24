@@ -12,7 +12,9 @@
  */
 
 // TODO: timeOut 함수를 작성해주세요.
-async function timeOut(promise, ms) {}
+async function timeOut(promise, ms) {
+    return Promise.race([promise, new Promise((resolve) => setTimeout(resolve, ms)).then(()=>Promise.reject("timeout"))])
+}
 
 // export 를 수정하지 마세요.
 export { timeOut };

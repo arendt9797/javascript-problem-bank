@@ -9,7 +9,18 @@
  * @returns {Function}
  */
 
-function once(fn) {}
+function once(fn) {
+    let checked = false
+    let result = null
+
+    return (...args) => {
+        if (!checked) {
+            checked = true
+            result = fn(...args)
+        }
+        return result
+    }
+}
 
 // export를 수정하지 마세요.
 export { once };

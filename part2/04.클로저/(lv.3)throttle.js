@@ -11,7 +11,18 @@
  */
 
 // TODO: throttle 함수를 작성하세요.
-function throttle(func, delay) {}
+function throttle(func, delay) {
+    let lastTime = 0
+
+    return (...args) => {
+        const currentTime = Date.now()
+
+        if (currentTime - lastTime >= delay) {
+            func(...args)
+            lastTime = currentTime
+        }
+    }
+}
 
 // export 를 수정하지 마세요.
 export { throttle };

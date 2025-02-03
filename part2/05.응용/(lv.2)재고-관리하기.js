@@ -15,7 +15,16 @@ const inventory = [
   { id: 200, name: "Mouse", stock: 5 },
 ];
 
-function addProduct(newItem) {}
+function addProduct(newItem) {
+  for (let item of inventory) {
+    if(item.id === newItem.id) {
+      item.stock += newItem.stock
+      return
+    }
+  }
+  inventory.push(newItem)
+  return
+}
 
 // export를 수정하지 마세요.
 export { inventory, addProduct };

@@ -10,7 +10,26 @@
  * @returns {string}
  */
 
-function formatDate(date) {}
+function formatDate(date) {
+    const stringDate = date.toLocaleString()
+    let arrayDate = stringDate.split('. ')
+    let arrayTime = arrayDate[3].slice(3).split(':')
+    let isMorning = arrayDate[3].slice(0, 3)
+    let plus12 = 0
+    if (isMorning === '오후 ') {
+        plus12 = 12
+    }
+    arrayDate.splice(3, 1, ...arrayTime)
+    let filledDate = arrayDate.map((d, idx) => {
+        if (idx === 3) {
+            d = String(parseInt(d) + plus12)
+        }
+        return d.length > 1 ? d : '0' + d
+    })
+    console.log('plus12 =====>', filledDate[3], parseInt(filledDate[3]) + plus12);
+    let result = `${filledDate[0]}년 ${filledDate[1]}월 ${filledDate[2]}일 ${filledDate[3]}시 ${filledDate[4]}분`
+    return result
+}
 
 // export를 수정하지 마세요.
 export { formatDate };

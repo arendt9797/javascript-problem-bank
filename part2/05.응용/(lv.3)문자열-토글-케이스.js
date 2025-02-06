@@ -12,6 +12,14 @@
 // TODO: 함수를 작성하세요 (예: toggleCase)
 function toggleCase(str) {
   // TODO
+  const toggle = [...str].map((char) => {
+    if (isNaN(char)) {
+      return char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()
+    }
+    return char
+  })
+
+  return toggle.join('')
 }
 
 // export 를 수정하지 마세요.

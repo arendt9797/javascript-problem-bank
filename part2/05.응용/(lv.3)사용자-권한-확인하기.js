@@ -13,7 +13,14 @@
  * @returns {boolean}
  */
 
-function checkAccess(user, requiredRole) {}
+function checkAccess(user, requiredRole) {
+    const type = {
+        "admin": 0,
+        "manager": 1,
+        "user": 2,
+    }
+    return type[user.role] <= type[requiredRole]
+}
 
 // export를 수정하지 마세요.
 export { checkAccess };

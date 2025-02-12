@@ -10,7 +10,17 @@
  * @returns {Promise<any>}
  */
 
-function retryRequest(promiseFactory, retries) {}
+function retryRequest(promiseFactory, retries) {
+    return new Promise((resolve, reject) => {
+        promiseFactory()
+            .then(resolve)
+            .catch((err) => {
+                return retries === 0 
+                    ? reject(err)
+                    : retryRequest(promiseFactory, retries-1).then(resolve, reject)
+            })
+    })
+}
 
 // export 를 수정하지 마세요.
 export { retryRequest };

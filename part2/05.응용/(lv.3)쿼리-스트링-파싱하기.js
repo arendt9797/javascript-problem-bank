@@ -10,6 +10,15 @@
  * @returns {object}
  */
 
-function parseQueryString(queryString) {}
+function parseQueryString(queryString) {
+    const answer = {}
+    if (queryString.length <= 1) return answer
+    queryString = queryString.slice(1).split("&")
+    queryString.forEach(query => {
+        const [key, value] = query.split("=")
+        answer[key] = value ?? ''
+    });
+    return answer
+}
 
 export { parseQueryString };

@@ -23,8 +23,21 @@
  * @returns {number | null}
  */
 
+// 1. reservations가 없다면 return 0
+// 2. reservations가 하나라면 return end
+// 3. reservations가 둘 이상이면 (다음 예약의 start - 이전 예약의 end) 와 timeLength 비교
+//  3-1. > 라면 이전 예약의 end 반환
+//  3-2  < 라면 다음 예약에서 2번 반복
 // TODO: scheduleNextAvailableTime 함수를 작성하세요.
-function scheduleNextAvailableTime(reservations, timeLength) {}
+function scheduleNextAvailableTime(reservations, timeLength) {
+    if (reservations.length === 0) return 0
+    if (reservations.length === 1) return reservations[0].end
+    const curRes = reservations.shift()
+    const nxtRes = reservations[0]
+    return nxtRes.start - curRes.end >= timeLength 
+        ? curRes.end
+        : scheduleNextAvailableTime(reservations, timeLength)
+}
 
 // export 를 수정하지 마세요.
 export { scheduleNextAvailableTime };

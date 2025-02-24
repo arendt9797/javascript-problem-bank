@@ -12,7 +12,34 @@
  * @returns {string}
  */
 
-function normalizePath(path) {}
+function normalizePath(path) {
+  const parts = path.split('/')
+  const stack = []
+  for (const part of parts) {
+    if (part === '' || part === '.') {
+      continue
+    } else if(part === '..') {
+      if (stack.length > 0 && stack[stack.length - 1] !== '..') {
+        stack.pop()
+      } else if (path.startsWith('/')) {
+        continue
+      } else {
+        stack.push(part)
+      }
+    } else {
+      stack.push(part)
+    }
+  }
+
+  let answer = stack.join('/')
+  if(path.startsWith('/')) {
+    answer = '/' + answer
+  }
+  if (path.endsWith('/') && answer !== '/') {
+    answer += '/'
+  }
+  return answer
+}
 
 // export 를 수정하지 마세요.
 export { normalizePath };
